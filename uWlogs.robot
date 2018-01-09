@@ -72,7 +72,7 @@ Ensure user
 Create wlog
     [Arguments]    ${user}    ${topic}    ${content}
     ${response}=    Post Request    ${wlogs session}    wlogs/${user}/${topic}    data={text=${content}}
-    [Return]    ${reponse}
+    [Return]    ${response}
 
 Ensure wlog
     [Arguments]    ${user}    ${topic}    ${content}
