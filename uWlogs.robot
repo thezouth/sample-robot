@@ -105,7 +105,9 @@ Should response list containing
     [Arguments]    ${response}    ${topic}
     ${response_json}=    ${response.json()}
     Log List    ${response_json}    level=DEBUG
-    List should contain    ${response_json}    ${topic}
+    Dictionary should contain key    ${response_json}    topics
+    ${response_topics}=    Get From Dictionary    ${response_json}    topics
+    List should contain    ${response_topics}    ${topic}
     
 Assert HTTP response status code
     [Arguments]    ${response}    ${expected code}
