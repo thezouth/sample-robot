@@ -62,7 +62,7 @@ Create http session
 
 Create user
     [Arguments]    ${user}
-    ${response}=    Post Request    ${wlogs session}    wlogs/${user}
+    ${response}=    Post Request    ${wlogs session}    wlog/${user}
     [Return]    ${response}
 
 Ensure user
@@ -71,7 +71,7 @@ Ensure user
 
 Create wlog
     [Arguments]    ${user}    ${topic}    ${content}
-    ${response}=    Post Request    ${wlogs session}    wlogs/${user}/${topic}    data={text=${content}}
+    ${response}=    Post Request    ${wlogs session}    wlog/${user}/${topic}    data={text=${content}}
     [Return]    ${response}
 
 Ensure wlog
