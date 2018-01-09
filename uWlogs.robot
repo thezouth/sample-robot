@@ -17,6 +17,11 @@ Create a new user
     ${response}=    Create user    ${user}
     Should response as Created    ${response}
 
+Create duplicate user
+    Ensure user    ${user}
+    ${response}=    Create user    ${user}
+    Should response as OK    ${response}
+
 Create a new wlog with an exist user
     Create user    ${user}
     ${response}=    Create wlog    ${user}    ${topic}    ${content}
