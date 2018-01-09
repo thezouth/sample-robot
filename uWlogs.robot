@@ -17,13 +17,13 @@ Create a new user
     ${response}=    Create user    ${user}
     Should response as Created    ${response}
 
-Create duplicate user
+Create a duplicate user
     Ensure user    ${user}
     ${response}=    Create user    ${user}
     Should response as OK    ${response}
 
 Create a new wlog with an exist user
-    Create user    ${user}
+    Ensure user    ${user}
     ${response}=    Create wlog    ${user}    ${topic}    ${content}
     Should response as Created    ${response}
 
@@ -76,7 +76,8 @@ Ensure user
 
 Create wlog
     [Arguments]    ${user}    ${topic}    ${content}
-    ${response}=    Post Request    ${wlogs session}    wlog/${user}/${topic}    data={text=${content}}
+    ${body}=    Create Dictionary    text    ${content}
+    ${response}=    Post Request    ${wlogs session}    wlog/${user}/${topic}    json=${body}
     [Return]    ${response}
 
 Ensure wlog
