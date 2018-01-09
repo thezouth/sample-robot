@@ -44,9 +44,9 @@ Get a wlog with exist user and topic
 
 Get a wlog with not exist user
     ${response}=    Get wlog    unknown-user    ${topic}
-    Should response as Not Found    ${response}
+    Should response as Bad Request    ${response}
 
-Get a wlog with exist user but not exist topic
+Get a wlog with exist user but not-exist topic
     Ensure user    ${user}
     ${response}=    Get wlog    ${user}    unknown-topic
     Should response as Not Found    ${response}
