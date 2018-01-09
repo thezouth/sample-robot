@@ -76,8 +76,9 @@ Ensure user
 
 Create wlog
     [Arguments]    ${user}    ${topic}    ${content}
-    ${body}=    Create Dictionary    text    ${content}
-    ${response}=    Post Request    ${wlogs session}    wlog/${user}/${topic}    json=${body}
+    ${body}=    Catenate    SEPARATOR=    {"text"="    ${content}    "}
+    Log    ${body}
+    ${response}=    Post Request    ${wlogs session}    wlog/${user}/${topic}    ${body}
     [Return]    ${response}
 
 Ensure wlog
