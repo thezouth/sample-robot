@@ -76,7 +76,7 @@ Ensure user
 
 Create wlog
     [Arguments]    ${user}    ${topic}    ${content}
-    ${body}=    Catenate    SEPARATOR=    {"text"="    ${content}    "}
+    ${body}=    Catenate    SEPARATOR=    {"text":"    ${content}    "}
     Log    ${body}
     ${response}=    Post Request    ${wlogs session}    wlog/${user}/${topic}    ${body}
     [Return]    ${response}
@@ -103,11 +103,10 @@ Should return wlog as
 
 Should response list containing
     [Arguments]    ${response}    ${topic}
-    ${response_json}=    ${response.json()}
-    Log List    ${response_json}    level=DEBUG
+    ${response_json}=    Call method    ${response}    json
     Dictionary should contain key    ${response_json}    topics
     ${response_topics}=    Get From Dictionary    ${response_json}    topics
-    List should contain    ${response_topics}    ${topic}
+    List should contain value   ${response_topics}    ${topic}
     
 Assert HTTP response status code
     [Arguments]    ${response}    ${expected code}
