@@ -23,11 +23,11 @@ Create a new wlog with an exist user
     Should response as Created    ${response}
 
 Create a new wlog unknown user
-    ${response}=    Create wlog      unknown user    a-new-topic    ${content}
+    ${response}=    Create wlog      unknown-user    a-new-topic    ${content}
     Should response as Bad Request    ${response}
 
 Create a new wlog with existing user and topic
-    Ensure wlog ${user}    ${topic}    ${content}
+    Ensure wlog    ${user}    ${topic}    ${content}
     ${response}=    Create wlog    ${user}    ${topic}    ${content}
     Should response as Bad Request    ${response}
 
@@ -79,6 +79,16 @@ Ensure wlog
     Ensure user    ${user}
     Create wlog    ${user}    ${topic}    ${content}
 
+Get wlog
+    [Arguments]    ${user}    ${topic}
+    ${response}    Get Request    ${wlogs session}    wlog/${user}/${topic}
+    [Return]   ${response}
+
+List wlogs of
+    [Arguments]    ${user}
+    ${response}    Get Request    ${wlogs session}    wlog/${user}
+    [Return]   ${response}
+
 Should return wlog as
     [Arguments]     ${response}    ${content}
     Log Dictionary    ${response.json()}    level=DEBUG
@@ -92,21 +102,21 @@ Should response list containing
     
 Assert HTTP response status code
     [Arguments]    ${response}    ${expected code}
-    Should be equal as string     ${response.status_code}    ${expected code}
+    Should be equal as strings     ${response.status_code}    ${expected code}
 
 Should response as Created
     [Arguments]    ${response}
-    Assert HTTP status code    ${response}    201
+    Assert HTTP response status code    ${response}    201
 
-Sould response as OK
+Should response as OK
     [Arguments]    ${response}
-    Assert HTTP status code    ${response}    200
+    Assert HTTP response status code    ${response}    200
 
 Should response as Bad Request
     [Arguments]    ${response}
-    Assert HTTP status code    ${response}    400
+    Assert HTTP response status code    ${response}    400
 
 Should response as Not Found
     [Arguments]    ${response}
-    Assert HTTP status code    ${response}    404
+    Assert HTTP response status code    ${response}    404
 
