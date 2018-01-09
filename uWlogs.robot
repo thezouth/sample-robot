@@ -6,7 +6,7 @@ Suite Setup    Create http session
 Suite Teardown     Delete all sessions
 
 *** Variables ***
-${host}    http://localhost:8000/
+${host}    http://localhost:8000
 ${wlogs session}    wLogs
 ${user}   janedoe
 ${topic}    have-a-good-day
