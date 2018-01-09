@@ -1,0 +1,6 @@
+/venv
+
+#RobotFramework output
+log.html
+output.xml
+report.html
